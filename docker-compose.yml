@@ -1,0 +1,26 @@
+version: '2.3'
+
+services:
+  dev:
+    image: jstriebel/kreuzwort-dev
+    build:
+      context: .
+      target: dev
+      dockerfile: Dockerfile
+    environment:
+      TZ: "${TZ:-Europe/Berlin}"
+      PORT: "8080"
+    volumes:
+      - ".:/kreuzwort"
+    working_dir: "/kreuzwort"
+    command:
+      - sh
+      - -c
+      - >
+        echo "You might run" &&
+        echo "  yarn install --frozen-lockfile" &&
+        echo "  yarn start" &&
+        sh
+    ports:
+      - "8080:8080"
+    user: ${UID:-1000}:${GID:-1000}

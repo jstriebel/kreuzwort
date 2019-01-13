@@ -1,0 +1,60 @@
+html, input {
+  font-family: 'Arimo', sans-serif;
+}
+
+h1 {
+  font-family: 'Prata', serif;
+  font-weight:normal;
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table {
+  border-width: 5px;
+}
+
+.cell-char {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  text-align: center;
+  border-width: 0px;
+}
+
+.cell-number {
+  font-size: 10px;
+  position: absolute;
+  margin-top: -3px;
+}
+
+textarea {
+  resize: none !important;
+}
+
+ol {
+  list-style-type: none;
+  float: left;
+}
+
+.ant-calendar-picker-input {
+  border-width: 0px !important;
+  height: 1em !important;
+  text-align: right;
+}
+
+.ant-input.ant-calendar-picker-input:hover {
+ border-right-width: 0px !important;
+}
+
+.ant-calendar-picker-icon {
+  display: none !important;
+}
+
+@media print {
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}
