@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  static_checks:
+    docker:
+      - image: node:10.11-alpinesteps:
+    - checkout
+      - run:
+          name: Install npm packages
+          command: yarn install --frozen-packages
+      - run:
+          name: Build static files
+          command: yarn build
+      - run:
+          name: Deploy
+          command: |
+            git config user.email "ci-build@jonathanstriebel.de"
+            git config user.name "ci-build"
+            yarn deploy
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - static_checks
