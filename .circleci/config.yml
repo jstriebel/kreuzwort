@@ -11,6 +11,9 @@ jobs:
       - run:
           name: Build static files
           command: yarn build
+      - add_ssh_keys:
+          fingerprints:
+            - "bd:2c:b7:bc:46:01:9f:ad:f7:1a:36:83:e8:87:5d:22"
       - run:
           name: Deploy
           command: |
