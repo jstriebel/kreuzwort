@@ -14,7 +14,9 @@ jobs:
       - run:
           name: Deploy
           command: |
-            apk --no-cache add git openssh-client
+            apk --no-cache add --quiet git openssh-client
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
             git config user.email "ci-build@jonathanstriebel.de"
             git config user.name "ci-build"
             yarn deploy
