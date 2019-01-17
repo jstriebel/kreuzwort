@@ -1,8 +1,9 @@
 version: 2
 jobs:
-  static_checks:
+  build_deploy:
     docker:
-      - image: node:10.11-alpinesteps:
+      - image: node:10.11-alpine
+    steps:
     - checkout
       - run:
           name: Install npm packages
@@ -21,4 +22,4 @@ workflows:
   version: 2
   default:
     jobs:
-      - static_checks
+      - build_deploy
