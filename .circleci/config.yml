@@ -14,6 +14,7 @@ jobs:
       - run:
           name: Deploy
           command: |
+            apk --no-cache add git
             git config user.email "ci-build@jonathanstriebel.de"
             git config user.name "ci-build"
             yarn deploy
