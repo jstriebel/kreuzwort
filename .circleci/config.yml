@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build_deploy:
+    branches:
+      ignore:
+        - gh-pages
     docker:
       - image: node:10.11-alpine
     steps:
@@ -33,7 +36,4 @@ workflows:
   version: 2
   default:
     jobs:
-      - build_deploy:
-          branches:
-            ignore:
-              - gh-pages
+      - build_deploy
