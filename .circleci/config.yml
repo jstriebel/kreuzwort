@@ -12,7 +12,7 @@ jobs:
           name: Lint code
           command: |
             yarn run lint
-            yarn install --frozen-packages
+            yarn run prettier-check
       - run:
           name: Build static files
           command: yarn build
