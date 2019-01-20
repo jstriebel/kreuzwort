@@ -33,4 +33,7 @@ workflows:
   version: 2
   default:
     jobs:
-      - build_deploy
+      - build_deploy:
+          branches:
+            ignore:
+              - gh-pages
