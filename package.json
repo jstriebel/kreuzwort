@@ -24,9 +24,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "lint": "eslint src/",
+    "prettier-check": "prettier --check 'src/**/*.{js,css}' '*.json' '.circleci/*.yml'",
+    "prettier": "prettier --write 'src/**/*.{js,css}' '*.json' '.circleci/*.yml'"
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.6.0",
+    "gh-pages": "^2.0.1",
+    "prettier": "1.16.0"
   }
 }

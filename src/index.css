@@ -1,13 +1,16 @@
-html, input {
-  font-family: 'Arimo', sans-serif;
+html,
+input {
+  font-family: "Arimo", sans-serif;
 }
 
 h1 {
-  font-family: 'Prata', serif;
-  font-weight:normal;
+  font-family: "Prata", serif;
+  font-weight: normal;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
   border-collapse: collapse;
 }
@@ -46,7 +49,7 @@ ol {
 }
 
 .ant-input.ant-calendar-picker-input:hover {
- border-right-width: 0px !important;
+  border-right-width: 0px !important;
 }
 
 .ant-calendar-picker-icon {
@@ -54,7 +57,8 @@ ol {
 }
 
 @media print {
-  .no-print, .no-print * {
+  .no-print,
+  .no-print * {
     display: none !important;
   }
 }

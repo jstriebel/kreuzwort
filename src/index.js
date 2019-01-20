@@ -1,41 +1,39 @@
-import { LocaleProvider } from 'antd';
-import de_DE from 'antd/lib/locale-provider/de_DE';
-import { isCollection } from 'immutable'
-import moment from 'moment';
-import 'moment/locale/de';
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import { PersistGate } from 'redux-persist/integration/react'
-import immutableTransform from 'redux-persist-transform-immutable'
+import { LocaleProvider } from "antd"
+import de_DE from "antd/lib/locale-provider/de_DE"
+import { isCollection } from "immutable"
+import moment from "moment"
+import "moment/locale/de"
+import React from "react"
+import ReactDOM from "react-dom"
+import { Provider } from "react-redux"
+import { createStore } from "redux"
+import { persistStore, persistReducer } from "redux-persist"
+import storage from "redux-persist/lib/storage"
+import { PersistGate } from "redux-persist/integration/react"
+import immutableTransform from "redux-persist-transform-immutable"
 
-import './index.css'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
-import reducer from './reducers'
+import "./index.css"
+import App from "./App"
+import registerServiceWorker from "./registerServiceWorker"
+import reducer from "./reducers"
 
 function immutableReconciler<State: Object>(
   inboundState: State,
   originalState: State,
   reducedState: State
 ): State {
-  if (! isCollection(reducedState.immutable))
-    return inboundState
+  if (!isCollection(reducedState.immutable)) return inboundState
   return {
     ...inboundState,
-    immutable: reducedState.immutable.merge(inboundState.immutable)
+    immutable: reducedState.immutable.merge(inboundState.immutable),
   }
 }
 
-
 const persistConfig = {
   transforms: [immutableTransform()],
-  key: 'root',
+  key: "root",
   storage,
-  stateReconciler: immutableReconciler
+  stateReconciler: immutableReconciler,
 }
 
 const persistedReducer = persistReducer(persistConfig, reducer)
@@ -47,7 +45,7 @@ const store = createStore(
 
 const persistor = persistStore(store)
 
-moment.locale('de');
+moment.locale("de")
 
 ReactDOM.render(
   <Provider store={store}>
@@ -56,5 +54,7 @@ ReactDOM.render(
         <App />
       </LocaleProvider>
     </PersistGate>
-  </Provider>, document.getElementById('app'));
-registerServiceWorker();
+  </Provider>,
+  document.getElementById("app")
+)
+registerServiceWorker()
