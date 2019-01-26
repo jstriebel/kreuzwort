@@ -17,6 +17,7 @@ const initialState = fromJS({
   abbreviation: initialAbbreviation,
   right: times(11, () => [{ question: initialQuestion }]),
   down: times(12, () => [{ question: initialQuestion }]),
+  help: true,
 })
 
 const makeWordIndex = (isDown, row_i, col_i) =>
@@ -85,6 +86,8 @@ export default (state = initialState, action) => {
       return state.setIn(questionIndex, question)
     case "RESET":
       return initialState
+    case "SET_HELP":
+      return state.set("help", action.isHelpOpen)
     default:
       return state
   }

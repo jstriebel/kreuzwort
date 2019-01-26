@@ -27,6 +27,13 @@ table {
   border-width: 0px;
 }
 
+@media print {
+  .cell-char,
+  .no-print * {
+    font-size: 0px;
+  }
+}
+
 .cell-number {
   font-size: 10px;
   position: absolute;

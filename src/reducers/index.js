@@ -1,7 +1,7 @@
 import { combineReducers } from "redux"
 
-import cross from "./cross"
+import immutable from "./immutable"
 
 export default combineReducers({
-  immutable: cross,
+  immutable,
 })

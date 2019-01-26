@@ -66,3 +66,8 @@ export const ensureAbbreviation = () => ({
 export const reset = () => ({
   type: "RESET",
 })
+
+export const setHelp = isHelpOpen => ({
+  type: "SET_HELP",
+  isHelpOpen: isHelpOpen,
+})
