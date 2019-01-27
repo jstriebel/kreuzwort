@@ -57,7 +57,7 @@ export default (state = initialState, action) => {
         action.row_i,
         action.col_i
       )
-      if (state.getIn(index)) return state.deleteIn(index)
+      if (state.getIn(index)) return state.setIn(index, undefined)
       else return state.setIn(index, Map({ question: initialQuestion }))
     case "SET_ABBREVIATION":
       return state.set("abbreviation", action.abbreviation)
