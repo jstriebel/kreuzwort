@@ -14,7 +14,7 @@ class Controlls extends React.Component {
       handleReset,
     } = this.props
     return (
-      <p className="no-print">
+      <div className="no-print">
         <div style={{ float: "left" }}>
           <span className="bold">Schreibrichtung: </span>
           Rüber{" "}
@@ -38,7 +38,8 @@ class Controlls extends React.Component {
             <Button size="small">Rücksetzen</Button>
           </Popconfirm>
         </div>
-      </p>
+        <br />
+      </div>
     )
   }
 }

@@ -80,65 +80,68 @@ class Cross extends React.Component {
     }
     return (
       <table>
-        {chars.map((row, row_i) => (
-          <tr key={row_i}>
-            {row.map((cell, col_i) => (
-              <td
-                key={[row_i, col_i]}
-                style={{
-                  borderLeftWidth: right.getIn([row_i, col_i]) ? "5px" : null,
-                  borderTopWidth: down.getIn([col_i, row_i]) ? "5px" : null,
-                }}
-              >
-                <div className="cell-number">
-                  {numbers.get(List([row_i, col_i]))}
-                </div>
-                <input
-                  className="cell-char"
-                  size="default"
-                  value={cell}
-                  onKeyPress={e => {
-                    if (e.key === "Enter") {
-                      handleSwitchSeparation(row_i, col_i)
-                    } else if (e.key.match(/[a-z]/i)) {
-                      handleCellChange(row_i, col_i, e.key)
-                      setNextFocus(row_i, col_i)
-                    }
+        <tbody>
+          {chars.map((row, row_i) => (
+            <tr key={row_i}>
+              {row.map((cell, col_i) => (
+                <td
+                  key={[row_i, col_i]}
+                  style={{
+                    borderLeftWidth: right.getIn([row_i, col_i]) ? "5px" : null,
+                    borderTopWidth: down.getIn([col_i, row_i]) ? "5px" : null,
                   }}
-                  onKeyDown={e => {
-                    switch (e.keyCode) {
-                      case BACKSPACE_CODE:
-                        handleCellChange(row_i, col_i, "")
-                        if (!cell) {
-                          setPrevFocus(row_i, col_i)
-                        }
-                        break
-                      case DELETE_CODE:
-                        handleCellChange(row_i, col_i, "")
-                        break
-                      case LEFT_CODE:
-                        nextLeftRef(row_i, col_i).current.focus()
-                        break
-                      case UP_CODE:
-                        nextUpRef(row_i, col_i).current.focus()
-                        break
-                      case RIGHT_CODE:
-                        nextRightRef(row_i, col_i).current.focus()
-                        break
-                      case DOWN_CODE:
-                        nextDownRef(row_i, col_i).current.focus()
-                        break
-                      default:
-                        return false
-                    }
-                  }}
-                  onFocus={event => event.target.select()}
-                  ref={this.input_refs[row_i][col_i]}
-                />
-              </td>
-            ))}
-          </tr>
-        ))}
+                >
+                  <div className="cell-number">
+                    {numbers.get(List([row_i, col_i]))}
+                  </div>
+                  <input
+                    className="cell-char"
+                    size="default"
+                    value={cell}
+                    onChange={e => undefined}
+                    onKeyPress={e => {
+                      if (e.key === "Enter") {
+                        handleSwitchSeparation(row_i, col_i)
+                      } else if (e.key.match(/[a-z]/i)) {
+                        handleCellChange(row_i, col_i, e.key)
+                        setNextFocus(row_i, col_i)
+                      }
+                    }}
+                    onKeyDown={e => {
+                      switch (e.keyCode) {
+                        case BACKSPACE_CODE:
+                          handleCellChange(row_i, col_i, "")
+                          if (!cell) {
+                            setPrevFocus(row_i, col_i)
+                          }
+                          break
+                        case DELETE_CODE:
+                          handleCellChange(row_i, col_i, "")
+                          break
+                        case LEFT_CODE:
+                          nextLeftRef(row_i, col_i).current.focus()
+                          break
+                        case UP_CODE:
+                          nextUpRef(row_i, col_i).current.focus()
+                          break
+                        case RIGHT_CODE:
+                          nextRightRef(row_i, col_i).current.focus()
+                          break
+                        case DOWN_CODE:
+                          nextDownRef(row_i, col_i).current.focus()
+                          break
+                        default:
+                          return false
+                      }
+                    }}
+                    onFocus={event => event.target.select()}
+                    ref={this.input_refs[row_i][col_i]}
+                  />
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
       </table>
     )
   }

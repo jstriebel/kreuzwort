@@ -41,7 +41,12 @@ class App extends React.Component {
       .filter(x => x)
     const numbers = new Map(
       right_coords
-        .concat(down_coords)
+        .filterNot(c => right_coords.includes(List([c.get(0), c.get(1) + 1])))
+        .concat(
+          down_coords.filterNot(c =>
+            down_coords.includes(List([c.get(0) + 1, c.get(1)]))
+          )
+        )
         .toSet()
         .toList()
         .sortBy(sortCoords)
@@ -52,7 +57,6 @@ class App extends React.Component {
         <div style={{ display: "inline-block" }}>
           <Header />
           <Controlls />
-          <br />
           <br />
           <Cross numbers={numbers} />
           <div align="right" style={{ marginTop: "1em", marginBottom: "1em" }}>
@@ -77,6 +81,9 @@ class App extends React.Component {
             <b>Rüber:</b>
             {right_coords.sortBy(sortCoords).map(key => {
               const number = numbers.get(key)
+              if (!number) {
+                return undefined
+              }
               const row_i = key.get(0)
               const col_i = key.get(1)
               const question = right.getIn([row_i, col_i, "question"])
@@ -88,7 +95,7 @@ class App extends React.Component {
                 )
                 .reduce((prev, el, i) => (el ? prev + el : prev + "_"), "")
               return (
-                <div>
+                <div key={number.toString()}>
                   {number} <i className="no-print">{word}</i>{" "}
                   <ContentEditable
                     tagName="span"
@@ -105,6 +112,9 @@ class App extends React.Component {
             <b>Runter:</b>
             {down_coords.sortBy(sortCoords).map(key => {
               const number = numbers.get(key)
+              if (!number) {
+                return undefined
+              }
               const row_i = key.get(0)
               const col_i = key.get(1)
               const question = down.getIn([col_i, row_i, "question"])
@@ -118,7 +128,7 @@ class App extends React.Component {
                 .takeWhile((v, k) => k === 0 || !down.getIn([col_i, row_i + k]))
                 .reduce((prev, el, i) => (el ? prev + el : prev + "_"), "")
               return (
-                <div>
+                <div key={number.toString()}>
                   {number} <i className="no-print">{word}</i>{" "}
                   <ContentEditable
                     tagName="span"

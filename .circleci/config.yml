@@ -27,6 +27,7 @@ jobs:
             ssh-keyscan github.com >> ~/.ssh/known_hosts
             git config user.email "ci-build@jonathanstriebel.de"
             git config user.name "ci-build"
+            cp -r .circleci build
             yarn deploy
 
 workflows:

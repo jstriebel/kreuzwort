@@ -32,7 +32,7 @@ class Header extends React.Component {
             tagName="span"
             html={newsName}
             onChange={e => handleSetNewsName(e.target.value)}
-            onBlur={handleEnsureNewsName()}
+            onBlur={handleEnsureNewsName}
           />{" "}
           Zeitung Magazin
         </h1>
@@ -41,7 +41,7 @@ class Header extends React.Component {
             html={subtitle}
             style={{ float: "left" }}
             onChange={e => handleSetSubtitle(e.target.value)}
-            onBlur={handleEnsureSubtitle()}
+            onBlur={handleEnsureSubtitle}
           />
           <div style={{ float: "right" }}>
             <DatePicker
