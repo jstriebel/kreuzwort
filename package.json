@@ -24,7 +24,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build",
     "lint": "eslint src/",
     "prettier-check": "prettier --check 'src/**/*.{js,css}' '*.json' '.circleci/*.yml'",
     "prettier": "prettier --write 'src/**/*.{js,css}' '*.json' '.circleci/*.yml'"

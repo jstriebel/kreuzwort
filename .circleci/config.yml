@@ -28,7 +28,7 @@ jobs:
             git config user.email "ci-build@jonathanstriebel.de"
             git config user.name "ci-build"
             cp -r .circleci build
-            yarn deploy
+            yarn run gh-pages --dotfiles -d build -m "$(git log --format=%B -n 1 $CIRCLE_SHA1)"
 
 workflows:
   version: 2
