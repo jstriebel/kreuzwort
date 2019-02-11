@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build_deploy:
+    docker:
+      - image: node:10.11-alpine
+    steps:
+      - checkout
+      - run:
+          name: Install npm packages
+          command: yarn install --frozen-packages
+      - run:
+          name: Lint code
+          command: |
+            yarn run lint
+            yarn run prettier-check
+      - run:
+          name: Build static files
+          command: yarn build
+      - add_ssh_keys:
+          fingerprints:
+            - "bd:2c:b7:bc:46:01:9f:ad:f7:1a:36:83:e8:87:5d:22"
+      - run:
+          name: Deploy
+          command: |
+            apk --no-cache add --quiet git openssh-client
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            git config user.email "ci-build@jonathanstriebel.de"
+            git config user.name "ci-build"
+            cp -r .circleci build
+            yarn run gh-pages --dotfiles -d build -m "$(git log --format=%B -n 1 $CIRCLE_SHA1)"
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - build_deploy:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
