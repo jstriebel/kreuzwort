@@ -41,10 +41,16 @@ class App extends React.Component {
       .filter(x => x)
     const numbers = new Map(
       right_coords
-        .filterNot(c => right_coords.includes(List([c.get(0), c.get(1) + 1])))
+        .filterNot(
+          c =>
+            c.get(1) === 11 ||
+            right_coords.includes(List([c.get(0), c.get(1) + 1]))
+        )
         .concat(
-          down_coords.filterNot(c =>
-            down_coords.includes(List([c.get(0) + 1, c.get(1)]))
+          down_coords.filterNot(
+            c =>
+              c.get(0) === 10 ||
+              down_coords.includes(List([c.get(0) + 1, c.get(1)]))
           )
         )
         .toSet()
