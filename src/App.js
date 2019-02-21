@@ -5,15 +5,16 @@ import ContentEditable from "react-contenteditable"
 import { connect } from "react-redux"
 
 import {
-  setQuestion,
-  ensureQuestion,
   setAbbreviation,
   ensureAbbreviation,
 } from "./actions"
+import Answers from "./components/Answers"
 import Controlls from "./components/Controlls"
 import Cross from "./components/Cross"
 import Header from "./components/Header"
 import Help from "./components/Help"
+
+export const sortCoords = coord => coord.get(0) * 1000 + coord.get(1)
 
 class App extends React.Component {
   render() {
@@ -22,13 +23,10 @@ class App extends React.Component {
       right,
       down,
       abbreviation,
-      handleSetQuestion,
-      handleEnsureQuestion,
       handeSetAbbreviation,
       handleEnsureAbbreviation,
     } = this.props
     // TODO ugly
-    const sortCoords = coord => coord.get(0) * 1000 + coord.get(1)
     const right_coords = right
       .flatMap((val, x) =>
         val.map((innerVal, y) => (innerVal ? List([x, y]) : undefined))
@@ -85,68 +83,19 @@ class App extends React.Component {
             }}
           >
             <b>Rüber:</b>
-            {right_coords.sortBy(sortCoords).map(key => {
-              const number = numbers.get(key)
-              if (!number) {
-                return undefined
-              }
-              const row_i = key.get(0)
-              const col_i = key.get(1)
-              const question = right.getIn([row_i, col_i, "question"])
-              const word = chars
-                .get(row_i)
-                .slice(col_i)
-                .takeWhile(
-                  (v, k) => k === 0 || !right.getIn([row_i, col_i + k])
-                )
-                .reduce((prev, el, i) => (el ? prev + el : prev + "_"), "")
-              return (
-                <div key={number.toString()}>
-                  {number} <i className="no-print">{word}</i>{" "}
-                  <ContentEditable
-                    tagName="span"
-                    html={question}
-                    onChange={e =>
-                      handleSetQuestion(false, row_i, col_i, e.target.value)
-                    }
-                    onBlur={() => handleEnsureQuestion(false, row_i, col_i)}
-                    style={{ paddingRight: 10 }}
-                  />
-                </div>
-              )
-            })}
+            <Answers
+              isRight={true}
+              numbers={numbers}
+              coords={right_coords}
+              chars={chars}
+            />
             <b>Runter:</b>
-            {down_coords.sortBy(sortCoords).map(key => {
-              const number = numbers.get(key)
-              if (!number) {
-                return undefined
-              }
-              const row_i = key.get(0)
-              const col_i = key.get(1)
-              const question = down.getIn([col_i, row_i, "question"])
-              const chars_transposed = chars
-                .get(0)
-                .zip(...chars.rest())
-                .map(List)
-              const word = chars_transposed
-                .get(col_i)
-                .slice(row_i)
-                .takeWhile((v, k) => k === 0 || !down.getIn([col_i, row_i + k]))
-                .reduce((prev, el, i) => (el ? prev + el : prev + "_"), "")
-              return (
-                <div key={number.toString()}>
-                  {number} <i className="no-print">{word}</i>{" "}
-                  <ContentEditable
-                    tagName="span"
-                    html={question}
-                    onChange={e =>
-                      handleSetQuestion(true, row_i, col_i, e.target.value)
-                    }
-                    onBlur={() => handleEnsureQuestion(true, row_i, col_i)}
-                  />
-                </div>
-              )
-            })}
+            <Answers
+              isRight={false}
+              numbers={numbers}
+              coords={down_coords}
+              chars={chars.get(0).zip(...chars.rest()).map(List)}
+            />
           </div>
         </div>
         <Help />
@@ -165,10 +114,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  handleSetQuestion: (isDown, row_i, col_i, question) =>
-    dispatch(setQuestion(isDown, row_i, col_i, question)),
-  handleEnsureQuestion: (isDown, row_i, col_i) =>
-    dispatch(ensureQuestion(isDown, row_i, col_i)),
   handeSetAbbreviation: abbreviation => dispatch(setAbbreviation(abbreviation)),
   handleEnsureAbbreviation: () => dispatch(ensureAbbreviation()),
 })
