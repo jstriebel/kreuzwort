@@ -42,7 +42,10 @@ class Answers extends React.Component {
             )
             .reduce((prev, el, i) => (el ? prev + el : prev + "_"), "")
           return (
-            <div style={{ display: "inline-block", fontSize: 12 }} key={number.toString()}>
+            <div
+              style={{ display: "inline-block", fontSize: 12 }}
+              key={number.toString()}
+            >
               {number} <i className="no-print">{word}</i>{" "}
               <ContentEditable
                 tagName="span"

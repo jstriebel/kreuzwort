@@ -54,7 +54,7 @@ class Header extends React.Component {
           </div>
         </div>
         <br />
-        <h2 style={{marginTop: 5}}>DAS KREUZ MIT DEN WORTEN</h2>
+        <h2 style={{ marginTop: 5 }}>DAS KREUZ MIT DEN WORTEN</h2>
       </div>
     )
   }
