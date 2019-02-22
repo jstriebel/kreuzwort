@@ -4,10 +4,7 @@ import { List, Map } from "immutable"
 import ContentEditable from "react-contenteditable"
 import { connect } from "react-redux"
 
-import {
-  setAbbreviation,
-  ensureAbbreviation,
-} from "./actions"
+import { setAbbreviation, ensureAbbreviation } from "./actions"
 import Answers from "./components/Answers"
 import Controlls from "./components/Controlls"
 import Cross from "./components/Cross"
@@ -94,7 +91,10 @@ class App extends React.Component {
               isRight={false}
               numbers={numbers}
               coords={down_coords}
-              chars={chars.get(0).zip(...chars.rest()).map(List)}
+              chars={chars
+                .get(0)
+                .zip(...chars.rest())
+                .map(List)}
             />
           </div>
         </div>

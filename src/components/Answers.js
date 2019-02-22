@@ -28,16 +28,21 @@ class Answers extends React.Component {
           const col_i = key.get(1)
           const prim_i = isRight ? row_i : col_i
           const sec_i = isRight ? col_i : row_i
-          const question = (isRight ? right : down).getIn([prim_i, sec_i, "question"])
+          const question = (isRight ? right : down).getIn([
+            prim_i,
+            sec_i,
+            "question",
+          ])
           const word = chars
             .get(prim_i)
             .slice(sec_i)
             .takeWhile(
-              (v, k) => k === 0 || !(isRight ? right : down).getIn([prim_i, sec_i + k])
+              (v, k) =>
+                k === 0 || !(isRight ? right : down).getIn([prim_i, sec_i + k])
             )
             .reduce((prev, el, i) => (el ? prev + el : prev + "_"), "")
           return (
-            <div style={{display: "inline-block"}} key={number.toString()}>
+            <div style={{ display: "inline-block" }} key={number.toString()}>
               {number} <i className="no-print">{word}</i>{" "}
               <ContentEditable
                 tagName="span"
@@ -67,7 +72,7 @@ const mapDispatchToProps = dispatch => ({
   handleSetQuestion: (isDown, row_i, col_i, question) =>
     dispatch(setQuestion(isDown, row_i, col_i, question)),
   handleEnsureQuestion: (isDown, row_i, col_i) =>
-    dispatch(ensureQuestion(isDown, row_i, col_i))
+    dispatch(ensureQuestion(isDown, row_i, col_i)),
 })
 
 export default connect(
