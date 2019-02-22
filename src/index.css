@@ -1,6 +1,12 @@
 html,
 body,
 input {
+  font-family: "Arimo", sans-serif !important;
+}
+
+html,
+body,
+input {
   font-family: "Arimo", sans-serif;
   font-size: 12px;
 }
