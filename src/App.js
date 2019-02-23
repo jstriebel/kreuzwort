@@ -5,7 +5,7 @@ import ContentEditable from "react-contenteditable"
 import { connect } from "react-redux"
 
 import { setAbbreviation, ensureAbbreviation } from "./actions"
-import Answers from "./components/Answers"
+import Questions from "./components/Questions"
 import Controlls from "./components/Controlls"
 import Cross from "./components/Cross"
 import Header from "./components/Header"
@@ -79,15 +79,15 @@ class App extends React.Component {
               marginBottom: "1em",
             }}
           >
-            <b>Rüber:</b>
-            <Answers
+            <Questions
+              title="Rüber"
               isRight={true}
               numbers={numbers}
               coords={right_coords}
               chars={chars}
             />
-            <b>Runter:</b>
-            <Answers
+            <Questions
+              title="Runter"
               isRight={false}
               numbers={numbers}
               coords={down_coords}
