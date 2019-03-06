@@ -88,6 +88,12 @@ export default (state = initialState, action) => {
       return initialState
     case "SET_HELP":
       return state.set("help", action.isHelpOpen)
+    case "SET_STATE":
+      if (action.state.get("version") !== state.get("version")) {
+        alert("Die zu ladende Version ist leider veraltet. Abbruch.")
+        return state
+      }
+      return action.state
     default:
       return state
   }

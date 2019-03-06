@@ -71,3 +71,8 @@ export const setHelp = isHelpOpen => ({
   type: "SET_HELP",
   isHelpOpen: isHelpOpen,
 })
+
+export const setState = state => ({
+  type: "SET_STATE",
+  state: state,
+})
