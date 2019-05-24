@@ -6403,9 +6403,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-contenteditable@^3.2.4:
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/react-contenteditable/-/react-contenteditable-3.2.4.tgz#0c847a2da31708411c61b27819585072fe0667eb"
+react-contenteditable@^3.2.6:
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/react-contenteditable/-/react-contenteditable-3.2.6.tgz#66c26e1c4fbbcf2e50ed9243329163e6396b2167"
   dependencies:
     "@types/prop-types" "^15.5.6"
     fast-deep-equal "^2.0.1"
