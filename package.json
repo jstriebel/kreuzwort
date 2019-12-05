@@ -11,7 +11,7 @@
     "react-contenteditable": "^3.2.4",
     "react-dom": "^16.5.2",
     "react-redux": "^5.1.0",
-    "react-scripts": "^1.1.5",
+    "react-scripts": "^3.3.0",
     "redux": "^4.0.1",
     "redux-devtools": "^3.5.0",
     "redux-immutable": "^4.0.0",
