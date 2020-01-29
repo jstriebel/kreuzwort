@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "eslint": "^5.12.1",
-    "eslint-config-prettier": "^3.6.0",
+    "eslint-config-prettier": "^6.10.0",
     "gh-pages": "^2.0.1",
     "prettier": "1.16.0"
   }
