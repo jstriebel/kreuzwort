@@ -5,13 +5,6 @@ import { connect } from "react-redux"
 
 import { writeCross, switchSeparation } from "../actions"
 
-const BACKSPACE_CODE = 8
-const DELETE_CODE = 46
-const LEFT_CODE = 37
-const UP_CODE = 38
-const RIGHT_CODE = 39
-const DOWN_CODE = 40
-
 class Cross extends React.Component {
   constructor(props) {
     super(props)
@@ -98,40 +91,37 @@ class Cross extends React.Component {
                     className="cell-char"
                     size="default"
                     value={cell}
-                    onChange={e => undefined}
-                    onKeyPress={e => {
-                      if (e.key === "Enter") {
-                        handleSwitchSeparation(row_i, col_i)
-                      } else if (e.key.match(/[a-z]/i)) {
-                        handleCellChange(row_i, col_i, e.key)
-                        setNextFocus(row_i, col_i)
-                      }
-                    }}
                     onKeyDown={e => {
-                      switch (e.keyCode) {
-                        case BACKSPACE_CODE:
+                      switch (e.key) {
+                        case "Enter":
+                          handleSwitchSeparation(row_i, col_i)
+                          break
+                        case "Backspace":
                           handleCellChange(row_i, col_i, "")
                           if (!cell) {
                             setPrevFocus(row_i, col_i)
                           }
                           break
-                        case DELETE_CODE:
+                        case "Delete":
                           handleCellChange(row_i, col_i, "")
                           break
-                        case LEFT_CODE:
+                        case "ArrowLeft":
                           nextLeftRef(row_i, col_i).current.focus()
                           break
-                        case UP_CODE:
+                        case "ArrowUp":
                           nextUpRef(row_i, col_i).current.focus()
                           break
-                        case RIGHT_CODE:
+                        case "ArrowRight":
                           nextRightRef(row_i, col_i).current.focus()
                           break
-                        case DOWN_CODE:
+                        case "ArrowDown":
                           nextDownRef(row_i, col_i).current.focus()
                           break
                         default:
-                          return false
+                          if (e.key.match(/^[a-z]$/i)) {
+                            handleCellChange(row_i, col_i, e.key)
+                            setNextFocus(row_i, col_i)
+                          } else return false
                       }
                     }}
                     onFocus={event => event.target.select()}
